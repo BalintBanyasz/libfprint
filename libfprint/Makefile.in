@@ -53,9 +53,10 @@ am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgincludedir)"
 libLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(lib_LTLIBRARIES)
 am__DEPENDENCIES_1 =
+am__DEPENDENCIES_2 = $(am__DEPENDENCIES_1)
 libfprint_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
 am__objects_1 = libfprint_la-upekts.lo
 am__objects_2 = libfprint_la-uru4000.lo
 am__objects_3 = libfprint_la-aes1610.lo
@@ -80,9 +81,11 @@ am__objects_9 = libfprint_la-bozorth3.lo libfprint_la-bz_alloc.lo \
 	libfprint_la-remove.lo libfprint_la-ridges.lo \
 	libfprint_la-shape.lo libfprint_la-sort.lo \
 	libfprint_la-util.lo
+am__objects_10 = libfprint_la-vfsDriver.lo
 am_libfprint_la_OBJECTS = libfprint_la-core.lo libfprint_la-data.lo \
 	libfprint_la-img.lo libfprint_la-imgdev.lo \
-	libfprint_la-aeslib.lo $(am__objects_8) $(am__objects_9)
+	libfprint_la-aeslib.lo $(am__objects_8) $(am__objects_9) \
+	$(am__objects_10)
 libfprint_la_OBJECTS = $(am_libfprint_la_OBJECTS)
 libfprint_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(libfprint_la_CFLAGS) \
@@ -227,6 +230,7 @@ sharedstatedir = @sharedstatedir@
 srcdir = @srcdir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
+top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 lib_LTLIBRARIES = libfprint.la
@@ -237,6 +241,10 @@ AES1610_SRC = drivers/aes1610.c
 AES2501_SRC = drivers/aes2501.c drivers/aes2501.h
 AES4000_SRC = drivers/aes4000.c
 FDU2000_SRC = drivers/fdu2000.c
+#validity -----
+VCS_SRCS = drivers/validity/vfsDriver.c
+VCS_INCS = -Idrivers/validity  
+#validity -----
 DRIVER_SRC = $(UPEKTS_SRC) $(URU4000_SRC) $(AES1610_SRC) $(AES2501_SRC) $(AES4000_SRC) $(UPEKTC_SRC) $(FDU2000_SRC)
 NBIS_SRC = \
 	nbis/include/bozorth.h \
@@ -287,7 +295,8 @@ libfprint_la_SOURCES = \
 	aeslib.c	\
 	aeslib.h	\
 	$(DRIVER_SRC)	\
-	$(NBIS_SRC)
+	$(NBIS_SRC)     \
+        $(VCS_SRCS)
 
 pkginclude_HEADERS = fprint.h
 all: all-am
@@ -399,6 +408,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfprint_la-upekts.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfprint_la-uru4000.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfprint_la-util.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfprint_la-vfsDriver.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -700,6 +710,13 @@ libfprint_la-util.lo: nbis/mindtct/util.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='nbis/mindtct/util.c' object='libfprint_la-util.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libfprint_la_CFLAGS) $(CFLAGS) -c -o libfprint_la-util.lo `test -f 'nbis/mindtct/util.c' || echo '$(srcdir)/'`nbis/mindtct/util.c
+
+libfprint_la-vfsDriver.lo: drivers/validity/vfsDriver.c
+@am__fastdepCC_TRUE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libfprint_la_CFLAGS) $(CFLAGS) -MT libfprint_la-vfsDriver.lo -MD -MP -MF $(DEPDIR)/libfprint_la-vfsDriver.Tpo -c -o libfprint_la-vfsDriver.lo `test -f 'drivers/validity/vfsDriver.c' || echo '$(srcdir)/'`drivers/validity/vfsDriver.c
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/libfprint_la-vfsDriver.Tpo $(DEPDIR)/libfprint_la-vfsDriver.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='drivers/validity/vfsDriver.c' object='libfprint_la-vfsDriver.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libfprint_la_CFLAGS) $(CFLAGS) -c -o libfprint_la-vfsDriver.lo `test -f 'drivers/validity/vfsDriver.c' || echo '$(srcdir)/'`drivers/validity/vfsDriver.c
 
 mostlyclean-libtool:
 	-rm -f *.lo

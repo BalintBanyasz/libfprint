@@ -7,10 +7,6 @@ AES1610_SRC = drivers/aes1610.c
 AES2501_SRC = drivers/aes2501.c drivers/aes2501.h
 AES4000_SRC = drivers/aes4000.c
 FDU2000_SRC = drivers/fdu2000.c
-#validity -----
-VCS_SRCS    = drivers/validity/vfsDriver.c
-
-VCS_INCS    = -Idrivers/validity 
 
 DRIVER_SRC = $(UPEKTS_SRC) $(URU4000_SRC) $(AES1610_SRC) $(AES2501_SRC) $(AES4000_SRC) $(UPEKTC_SRC) $(FDU2000_SRC)
 
@@ -64,7 +60,6 @@ libfprint_la_SOURCES =	\
 	aeslib.c	\
 	aeslib.h	\
 	$(DRIVER_SRC)	\
-	$(NBIS_SRC)     \
-        $(VCS_SRCS)
+	$(NBIS_SRC)
 
 pkginclude_HEADERS = fprint.h

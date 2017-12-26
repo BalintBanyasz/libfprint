@@ -223,8 +223,6 @@ err:
 	return -EIO;
 }
 
-#define MIN_ACCEPTABLE_MINUTIAE 10
-
 int img_dev_enroll(struct fp_dev *dev, gboolean initial, int stage,
 	struct fp_print_data **ret, struct fp_img **_img)
 {
@@ -259,8 +257,6 @@ int img_dev_enroll(struct fp_dev *dev, gboolean initial, int stage,
 	*ret = print;
 	return FP_ENROLL_COMPLETE;
 }
-
-#define BOZORTH3_DEFAULT_THRESHOLD 40
 
 static int img_dev_verify(struct fp_dev *dev,
 	struct fp_print_data *enrolled_print, struct fp_img **_img)

@@ -335,6 +335,7 @@ static struct fp_img_driver * const img_drivers[] = {
 	&aes4000_driver,
 	&upektc_driver,
 	&fdu2000_driver,
+	&validity_driver,
 };
 
 static void register_drivers(void)

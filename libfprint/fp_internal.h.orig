@@ -122,9 +122,6 @@ enum fp_print_data_type fpi_driver_get_data_type(struct fp_driver *drv);
 /* flags for fp_img_driver.flags */
 #define FP_IMGDRV_SUPPORTS_UNCONDITIONAL_CAPTURE (1 << 0)
 
-#define BOZORTH3_DEFAULT_THRESHOLD 40
-#define MIN_ACCEPTABLE_MINUTIAE 10
-
 struct fp_img_driver {
 	struct fp_driver driver;
 	uint16_t flags;
@@ -149,7 +146,6 @@ extern struct fp_img_driver aes1610_driver;
 extern struct fp_img_driver aes2501_driver;
 extern struct fp_img_driver aes4000_driver;
 extern struct fp_img_driver fdu2000_driver;
-extern struct fp_img_driver validity_driver;
 
 void fpi_img_driver_setup(struct fp_img_driver *idriver);
 
